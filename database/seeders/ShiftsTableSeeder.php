@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Shift;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ShiftsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BillsTableSeeder::class);
-        $this->call(ShiftsTableSeeder::class);
-        $this->call(PaymentMethodsTableSeeder::class);
+        Shift::create([
+        ]);
     }
 }

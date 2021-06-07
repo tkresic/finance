@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bill;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class BillsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BillsTableSeeder::class);
-        $this->call(ShiftsTableSeeder::class);
-        $this->call(PaymentMethodsTableSeeder::class);
+        Bill::create([
+
+        ]);
     }
 }
