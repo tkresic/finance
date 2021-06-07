@@ -15,7 +15,11 @@ class PaymentMethodsTableSeeder extends Seeder
     public function run()
     {
         PaymentMethod::create([
+            'name' => 'Gotovina'
+        ]);
 
+        PaymentMethod::create([
+            'name' => 'Kartica'
         ]);
     }
 }

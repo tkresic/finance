@@ -15,6 +15,11 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('payment_method_id');
+            $table->json('user');
+            $table->integer('number');
+            $table->string('label');
+            $table->integer('gross');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shift extends Model
@@ -23,4 +22,13 @@ class Shift extends Model
      * @var array
      */
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user' => 'array',
+    ];
 }

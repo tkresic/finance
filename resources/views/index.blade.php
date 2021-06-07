@@ -109,30 +109,6 @@
                 <td>GET</td>
                 <td>Lista svih načina plaćanja</td>
             </tr>
-            <tr class="create">
-                <td>CREATE</td>
-                <td>/api/bills</td>
-                <td>POST</td>
-                <td>Kreira novi račun</td>
-            </tr>
-            <tr class="read">
-                <td>READ</td>
-                <td>/api/bills/:id</td>
-                <td>GET</td>
-                <td>Prikazuje informacije o računu</td>
-            </tr>
-            <tr class="update">
-                <td>UPDATE</td>
-                <td>/api/bills/:id</td>
-                <td>PUT</td>
-                <td>Ažurira račun</td>
-            </tr>
-            <tr class="delete">
-                <td>DELETE</td>
-                <td>/api/bills/:id</td>
-                <td>DELETE</td>
-                <td>Briše račun</td>
-            </tr>
         </tbody>
     </table>
 </div>

@@ -15,6 +15,10 @@ class CreateShiftsTable extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
+            $table->integer('gross');
+            $table->json('user');
+            $table->timestamp('start');
+            $table->timestamp('end')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
