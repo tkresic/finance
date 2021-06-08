@@ -11,5 +11,5 @@ Finance microservice written in Lumen for Cash register application for restaura
 
 ## Run the app
 
-`php -S localhost:8001 -t public`
+`php -S localhost:8002 -t public`
 

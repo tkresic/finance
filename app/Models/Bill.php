@@ -4,12 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bill extends Model
 {
-    use SoftDeletes;
-
     /**
      * The attributes that aren't mass assignable. (All attributes are mass assignable.)
      *
@@ -38,7 +35,8 @@ class Bill extends Model
      *
      * @return BelongsTo
      */
-    public function paymentMethod(): BelongsTo {
+    public function paymentMethod(): BelongsTo
+    {
         return $this->belongsTo(PaymentMethod::class);
     }
 }

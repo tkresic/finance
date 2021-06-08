@@ -71,6 +71,10 @@
         background-color: rgba(217, 83, 79, .5);
     }
 
+    tr.padding td:first-child {
+        padding-left: 50px;
+    }
+
 </style>
 
 <div class="container">
@@ -85,7 +89,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="index">
+            <tr>
+                <td>Računi</td>
+            </tr>
+            <tr class="padding index">
                 <td>INDEX</td>
                 <td>
                     <a href="{{ url('/api/bills') }}">/api/bills</a>
@@ -93,21 +100,92 @@
                 <td>GET</td>
                 <td>Lista svih računa</td>
             </tr>
-            <tr class="index">
+            <tr class="padding create">
+                <td>CREATE</td>
+                <td>/api/bills</td>
+                <td>POST</td>
+                <td>Kreira novi račun</td>
+            </tr>
+            <tr class="padding read">
+                <td>READ</td>
+                <td>/api/bills/:id</td>
+                <td>GET</td>
+                <td>Prikazuje informacije o računu</td>
+            </tr>
+            <tr class="padding update">
+                <td>UPDATE</td>
+                <td>/api/bills/:id</td>
+                <td>PUT</td>
+                <td>Stornira račun</td>
+            </tr>
+            <tr>
+                <td>Smjene</td>
+            </tr>
+            <tr class="padding index">
                 <td>INDEX</td>
                 <td>
-                    <a href="{{ url('/api/bills') }}">/api/shifts</a>
+                    <a href="{{ url('/api/shifts') }}">/api/shifts</a>
                 </td>
                 <td>GET</td>
                 <td>Lista svih smjena</td>
             </tr>
-            <tr class="index">
+            <tr class="padding create">
+                <td>CREATE</td>
+                <td>/api/shifts</td>
+                <td>POST</td>
+                <td>Kreira novu smjenu</td>
+            </tr>
+            <tr class="padding update">
+                <td>UPDATE</td>
+                <td>/api/shifts/:id</td>
+                <td>PUT</td>
+                <td>Ažurira smjenu</td>
+            </tr>
+            <tr>
+                <td>Načini plaćanja</td>
+            </tr>
+            <tr class="padding index">
                 <td>INDEX</td>
                 <td>
                     <a href="{{ url('/api/payment-methods') }}">/api/payment-methods</a>
                 </td>
                 <td>GET</td>
                 <td>Lista svih načina plaćanja</td>
+            </tr>
+            <tr class="padding update">
+                <td>UPDATE</td>
+                <td>/api/payment-methods/:id</td>
+                <td>PUT</td>
+                <td>Ažurira način plaćanja</td>
+            </tr>
+            <tr>
+                <td>Porezi</td>
+            </tr>
+            <tr class="padding index">
+                <td>INDEX</td>
+                <td>
+                    <a href="{{ url('/api/taxes') }}">/api/taxes</a>
+                </td>
+                <td>GET</td>
+                <td>Lista svih poreza</td>
+            </tr>
+            <tr class="padding create">
+                <td>CREATE</td>
+                <td>/api/taxes</td>
+                <td>POST</td>
+                <td>Kreira novi porez</td>
+            </tr>
+            <tr class="padding update">
+                <td>UPDATE</td>
+                <td>/api/taxes/:id</td>
+                <td>PUT</td>
+                <td>Ažurira porez</td>
+            </tr>
+            <tr class="padding delete">
+                <td>DELETE</td>
+                <td>/api/taxes/:id</td>
+                <td>DELETE</td>
+                <td>Briše porez</td>
             </tr>
         </tbody>
     </table>

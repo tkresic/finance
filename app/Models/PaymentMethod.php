@@ -4,18 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PaymentMethod extends Model
 {
-    use SoftDeletes;
-
     /**
-     * The attributes that aren't mass assignable. (All attributes are mass assignable.)
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = ['active'];
 
     /**
      * The attributes which are excluded from every query.
@@ -29,7 +26,8 @@ class PaymentMethod extends Model
      *
      * @return HasMany
      */
-    public function bills(): HasMany {
+    public function bills(): HasMany
+    {
         return $this->hasMany(Bill::class);
     }
 }
