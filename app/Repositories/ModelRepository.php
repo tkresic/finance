@@ -34,7 +34,7 @@ abstract class ModelRepository
      */
     public function all(array $with = [])
     {
-        return $this->model->with($with)->get();
+        return $this->model->with($with)->orderBy('id', 'DESC')->get();
     }
 
     /**

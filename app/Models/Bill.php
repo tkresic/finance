@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 class Bill extends Model
 {
@@ -20,7 +21,7 @@ class Bill extends Model
      *
      * @var array
      */
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast.
@@ -61,5 +62,16 @@ class Bill extends Model
     public function restoredByBill(): HasOne
     {
         return $this->hasOne(self::class, 'restored_bill_id');
+    }
+
+    /**
+     * Format created_at to d.m.Y H:i:s format.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getCreatedAtAttribute($value): string
+    {
+        return Carbon::parse($value)->format('d.m.Y H:i:s');
     }
 }
