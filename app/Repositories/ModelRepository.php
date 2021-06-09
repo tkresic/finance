@@ -70,6 +70,7 @@ abstract class ModelRepository
     public function update($id, $attributes = [])
     {
         $model = $this->model->find($id);
+
         if ($model == null) {
             return null;
         }

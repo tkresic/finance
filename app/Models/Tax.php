@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tax extends Model
 {
     /**
-     * The attributes that aren't mass assignable. (All attributes are mass assignable.)
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = ['name', 'amount'];
 
     /**
      * The attributes which are excluded from every query.
