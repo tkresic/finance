@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Shift extends Model
 {
@@ -28,4 +29,26 @@ class Shift extends Model
     protected $casts = [
         'user' => 'array',
     ];
+
+    /**
+     * Format start attribute to d.m.Y H:i:s format.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getStartAttribute($value): string
+    {
+        return Carbon::parse($value)->format('d.m.Y H:i:s');
+    }
+
+    /**
+     * Format end attribute to d.m.Y H:i:s format.
+     *
+     * @param $value
+     * @return string|null
+     */
+    public function getEndAttribute($value): ?string
+    {
+        return $value !== null ? Carbon::parse($value)->format('d.m.Y H:i:s') : '/';
+    }
 }

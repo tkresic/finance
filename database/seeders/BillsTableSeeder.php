@@ -21,7 +21,7 @@ class BillsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'branch' => [
                 'id' => 1,
@@ -46,7 +46,7 @@ class BillsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'branch' => [
                 'id' => 1,

@@ -19,7 +19,7 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-16 12:00:00',
             'end' => '2021-06-16 18:00:00'
@@ -30,7 +30,7 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-17 12:00:00',
             'end' => '2021-06-17 18:00:00'
@@ -41,7 +41,7 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-18 12:00:00',
             'end' => '2021-06-18 18:00:00'
@@ -52,7 +52,7 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-19 12:00:00',
             'end' => '2021-06-19 18:00:00'
@@ -63,7 +63,7 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-20 12:00:00',
             'end' => '2021-06-20 18:00:00'
@@ -74,10 +74,9 @@ class ShiftsTableSeeder extends Seeder
             'user' => [
                 'id' => 1,
                 'name' => 'Toni Krešić',
-                'email' => 'tonikresic1997@gmail.com'
+                'username' => 'tkresic'
             ],
             'start' => '2021-06-20 12:00:00',
-            'end' => '2021-06-20 18:00:00'
         ]);
     }
 }
