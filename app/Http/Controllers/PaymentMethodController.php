@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PaymentMethodCollection;
+use App\Models\PaymentMethod;
 use App\Repositories\PaymentMethodRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,11 +23,20 @@ class PaymentMethodController extends Controller
     /**
      * Lists all payment methods.
      *
+     * @param Request $request
      * @return PaymentMethodCollection|Response|ResponseFactory
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response($this->paymentMethodRepository->all(), Response::HTTP_OK);
+        $active = $request->input('active');
+
+        $paymentMethods = PaymentMethod::when($active, function ($query) use ($active) {
+                $query->where('active', $active);
+            })
+            ->get();
+
+
+        return response($paymentMethods, Response::HTTP_OK);
     }
 
     /**
