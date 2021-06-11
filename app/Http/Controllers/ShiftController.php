@@ -64,6 +64,11 @@ class ShiftController extends Controller
 
         $shift = $this->shiftRepository->find($id);
 
+        if ($shift == null) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+
+
         if ($shift->end) {
             return response()->json(['end' => ['Shift has already ended.']], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
@@ -73,7 +78,7 @@ class ShiftController extends Controller
             'gross' => $request->input('gross')
         ];
 
-        $shift = $this->shiftRepository->update($request->input('shift_id'), $data);
+        $shift = $this->shiftRepository->update($id, $data);
 
         return response()->json($shift, Response::HTTP_OK);
     }
@@ -95,7 +100,6 @@ class ShiftController extends Controller
         ];
 
         if ($id != -1) {
-            $rules['shift_id'] = 'required|integer|exists:shifts,id';
             $rules['end'] = 'required|date_format:Y-m-d H:i:s';
             $rules['gross'] = 'required|integer';
         } else {

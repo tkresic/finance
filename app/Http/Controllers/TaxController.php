@@ -58,7 +58,13 @@ class TaxController extends Controller
     {
         $this->validateAttributes($request, $id);
 
-        $tax = $this->taxRepository->update($request->input('tax_id'), $request->all());
+        $tax = $this->taxRepository->find($id);
+
+        if ($tax == null) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+
+        $tax = $this->taxRepository->update($id, $request->all());
 
         return response()->json($tax, Response::HTTP_OK);
     }
@@ -92,13 +98,10 @@ class TaxController extends Controller
     private function validateAttributes(Request $request, int $id = -1)
     {
         $rules = [
-            'name' => 'required|string|max:255|unique:taxes,name,' . $id,
+            'name' => "required|string|max:255|unique:taxes,name,$id",
             'amount' => 'required|integer|between:1,100',
         ];
 
-        if ($id != -1) {
-            $rules['tax_id'] = 'required|integer|exists:taxes,id';
-        }
 
         $this->validate($request, $rules);
     }

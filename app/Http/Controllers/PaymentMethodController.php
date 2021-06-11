@@ -49,9 +49,15 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, int $id): JsonResponse
     {
-        $this->validateAttributes($request, $id);
+        $this->validateAttributes($request);
 
-        $paymentMethod = $this->paymentMethodRepository->update($request->input('payment_method_id'), $request->all());
+        $paymentMethod = $this->paymentMethodRepository->find($id);
+
+        if ($paymentMethod == null) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+
+        $paymentMethod = $this->paymentMethodRepository->update($id, $request->all());
 
         return response()->json($paymentMethod, Response::HTTP_OK);
     }
@@ -60,18 +66,14 @@ class PaymentMethodController extends Controller
      * Validation method for create and update methods.
      *
      * @param Request $request
-     * @param int $id
      * @throws ValidationException
      */
-    private function validateAttributes(Request $request, int $id)
+    private function validateAttributes(Request $request)
     {
         $rules = [
             'active' => 'required|boolean',
         ];
 
-        if ($id != -1) {
-            $rules['payment_method_id'] = 'required|integer|exists:payment_methods,id';
-        }
 
         $this->validate($request, $rules);
     }

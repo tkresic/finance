@@ -57,7 +57,11 @@ class BillController extends Controller
     {
         $this->validateAttributes($request, $id);
 
-        $originalBill = $this->billRepository->find($request->input('bill_id'));
+        $originalBill = $this->billRepository->find($id);
+
+        if ($originalBill == null) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
 
         if ($originalBill->restored_bill_id) {
             return response()->json(['bill' => ['Bill was already restored.']], Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -99,7 +103,6 @@ class BillController extends Controller
                 'user.username' => 'required|string|max:255',
                 'business_place_label' => 'required|integer|min:1',
                 'payment_method_id' => 'required|integer|exists:payment_methods,id',
-                'bill_id' => 'required|integer|exists:bills,id',
                 'restoring_reason' => 'required|string|max:255',
             ];
         }
