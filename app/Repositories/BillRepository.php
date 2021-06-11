@@ -75,7 +75,7 @@ class BillRepository extends ModelRepository
      */
     public function restore(Bill $originalBill, array $data, string $restoringReason): Bill
     {
-        $restoredBill = $originalBill->replicate(['payment_method_id', 'user', 'branch', 'business_place_label', 'number', 'label']);
+        $restoredBill = $originalBill->replicate(['user',  'number', 'label']);
 
         $number = $this->getNewBillNumber();
 
@@ -86,18 +86,14 @@ class BillRepository extends ModelRepository
             $products[] = $product;
         }
 
-        $restoredBill->payment_method_id = $data['payment_method_id'];
+        $restoredBill->restored_bill_id = $originalBill->id;
         $restoredBill->user = $data['user'];
-        $restoredBill->branch = $data['branch'] ?? null;
-        $restoredBill->business_place_label = $data['business_place_label'];
         $restoredBill->number = $number;
-        $restoredBill->label = $this->getNewBillLabel($data['business_place_label'], $number);
+        $restoredBill->label = $this->getNewBillLabel($restoredBill->business_place_label, $number);
         $restoredBill->restoring_reason = $restoringReason;
         $restoredBill->gross = -$originalBill->gross;
         $restoredBill->products = $products;
         $restoredBill->save();
-
-        $originalBill->update(['restored_bill_id' => $restoredBill->id]);
 
         return $restoredBill;
     }

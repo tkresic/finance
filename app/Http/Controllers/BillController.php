@@ -26,7 +26,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return response($this->billRepository->all(['paymentMethod', 'restoredBill']), Response::HTTP_OK);
+        return response($this->billRepository->all(['paymentMethod', 'restoredBill', 'restoredByBill']), Response::HTTP_OK);
     }
 
     /**
@@ -101,8 +101,6 @@ class BillController extends Controller
                 'user.id' => 'required|integer',
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
-                'business_place_label' => 'required|integer|min:1',
-                'payment_method_id' => 'required|integer|exists:payment_methods,id',
                 'restoring_reason' => 'required|string|max:255',
             ];
         }
