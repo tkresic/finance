@@ -13,7 +13,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'bills'], function () use ($router) {
         $router->get('/', 'BillController@index');
         $router->post('/', 'BillController@create');
-        $router->get('/{id}', 'BillController@read');
         $router->put('/{id}', 'BillController@update');
     });
 

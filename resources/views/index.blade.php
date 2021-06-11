@@ -106,12 +106,6 @@
                 <td>POST</td>
                 <td>Kreira novi račun</td>
             </tr>
-            <tr class="padding read">
-                <td>READ</td>
-                <td>/api/bills/:id</td>
-                <td>GET</td>
-                <td>Prikazuje informacije o računu</td>
-            </tr>
             <tr class="padding update">
                 <td>UPDATE</td>
                 <td>/api/bills/:id</td>

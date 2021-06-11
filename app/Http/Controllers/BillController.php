@@ -46,19 +46,6 @@ class BillController extends Controller
     }
 
     /**
-     * Reads the bill.
-     *
-     * @param $id
-     * @return Response|ResponseFactory
-     */
-    public function read(int $id)
-    {
-        $bill = $this->billRepository->find($id);
-
-        return $bill == null ? response(null, Response::HTTP_NOT_FOUND) : response($bill, Response::HTTP_OK);
-    }
-
-    /**
      * Updates the bill.
      *
      * @param Request $request
