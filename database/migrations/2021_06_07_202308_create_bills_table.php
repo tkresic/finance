@@ -26,6 +26,8 @@ class CreateBillsTable extends Migration
 
             $table->string('label');
             $table->integer('gross');
+            $table->integer('net');
+            $table->json('taxes');
 
             $table->string('restoring_reason')->nullable();
 

@@ -45,10 +45,25 @@ class BillRepository extends ModelRepository
         $label = $this->getNewBillLabel($data['business_place_label'], $number);
 
         $gross = 0;
+        $vat = 0;
+        $taxes = [];
 
-        // TODO => Calculate tax for each product. Each product should have taxes field in the shop ms.
         foreach ($data['products'] as $product) {
-            $gross += $product['quantity'] * $product['price'];
+            $productTotal = $product['quantity'] * $product['price'];
+            $gross += $productTotal;
+
+            $productVat = round($product['tax']['amount'] / 100 * $productTotal);
+            $vat += $productVat;
+
+
+            $key = array_search($product['tax']['id'], array_column($taxes, 'id'));
+
+            if (!empty($taxes) && $key !== FALSE) {
+                $taxes[$key]['total'] += $productVat;
+            } else {
+                $product['tax']['total'] = $productVat;
+                $taxes[] = $product['tax'];
+            }
         }
 
         $data = [
@@ -59,7 +74,9 @@ class BillRepository extends ModelRepository
             'products' => $data['products'],
             'number' => $number,
             'label' => $label,
-            'gross' => $gross
+            'gross' => $gross,
+            'net' => $gross - $vat,
+            'taxes' => $taxes,
         ];
 
         return $this->create($data);
@@ -86,12 +103,21 @@ class BillRepository extends ModelRepository
             $products[] = $product;
         }
 
+        $taxes = [];
+
+        foreach ($originalBill->taxes as $tax) {
+            $tax['total'] = -$tax['total'];
+            $taxes[] = $tax;
+        }
+
         $restoredBill->restored_bill_id = $originalBill->id;
         $restoredBill->user = $data['user'];
         $restoredBill->number = $number;
         $restoredBill->label = $this->getNewBillLabel($restoredBill->business_place_label, $number);
         $restoredBill->restoring_reason = $restoringReason;
         $restoredBill->gross = -$originalBill->gross;
+        $restoredBill->net = -$originalBill->net;
+        $restoredBill->taxes = $taxes;
         $restoredBill->products = $products;
         $restoredBill->save();
 

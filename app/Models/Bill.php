@@ -15,7 +15,20 @@ class Bill extends Model
      *
      * @var array
      */
-    protected $fillable = ['payment_method_id', 'business_place_label', 'restored_bill_id', 'user', 'branch', 'products', 'number', 'label', 'gross', 'restoring_reason'];
+    protected $fillable = [
+        'payment_method_id',
+        'business_place_label',
+        'restored_bill_id',
+        'user',
+        'branch',
+        'products',
+        'number',
+        'label',
+        'gross',
+        'net',
+        'taxes',
+        'restoring_reason'
+    ];
 
     /**
      * The attributes which are excluded from every query.
@@ -33,6 +46,7 @@ class Bill extends Model
         'user' => 'array',
         'branch' => 'array',
         'products' => 'array',
+        'taxes' => 'array',
     ];
 
     /**

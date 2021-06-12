@@ -93,7 +93,11 @@ class BillController extends Controller
                 'products.*.id' => 'required|integer',
                 'products.*.price' => 'required|integer|min:1',
                 'products.*.name' => 'required|string|max:255',
-                'products.*.quantity' => 'required|integer|min:1'
+                'products.*.quantity' => 'required|integer|min:1',
+                'products.*.tax' => 'required|array',
+                'products.*.tax.id' => 'required|integer',
+                'products.*.tax.name' => 'required|string',
+                'products.*.tax.amount' => 'required|integer|between:1,100',
             ];
         } else {
             $rules = [
