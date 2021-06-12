@@ -49,6 +49,6 @@ class Shift extends Model
      */
     public function getEndAttribute($value): ?string
     {
-        return $value !== null ? Carbon::parse($value)->format('d.m.Y H:i:s') : '/';
+        return $value !== null ? Carbon::parse($value)->format('d.m.Y H:i:s') : null;
     }
 }

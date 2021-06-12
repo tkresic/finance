@@ -64,7 +64,7 @@ class BillController extends Controller
         }
 
         if ($originalBill->restored_bill_id) {
-            return response()->json(['bill' => ['Bill was already restored.']], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json(['bill' => ['Račun je već storniran']], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $bill = $this->billRepository->restore($originalBill, $request->all(), $request->input('restoring_reason'));

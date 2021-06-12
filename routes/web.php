@@ -19,6 +19,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'shifts'], function () use ($router) {
         $router->get('/', 'ShiftController@index');
         $router->post('/', 'ShiftController@create');
+        $router->get('/latest', 'ShiftController@latest');
         $router->put('/{id}', 'ShiftController@update');
     });
 

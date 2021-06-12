@@ -33,12 +33,19 @@ class ShiftController extends Controller
      * Creates new shift.
      *
      * @param Request $request
-     * @return Response|ResponseFactory
+     * @return JsonResponse
      * @throws ValidationException
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         $this->validateAttributes($request);
+
+
+        $shift = $this->shiftRepository->latest();
+
+        if ($shift && !$shift->end) {
+            return response()->json(['end' => ['Zadnja smjena nije završila']], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         $data = [
             'user' => $request->input('user'),
@@ -47,8 +54,27 @@ class ShiftController extends Controller
 
         $shift = $this->shiftRepository->create($data);
 
-        return response($shift, Response::HTTP_OK);
+        return response()->json($shift, Response::HTTP_OK);
     }
+
+
+    /**
+     * Gets last unfinished shift.
+     *
+     * @return JsonResponse
+     */
+    public function latest(): JsonResponse
+    {
+        $shift = $this->shiftRepository->latest();
+
+        if ($shift == null || $shift->end) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+
+
+        return response()->json($shift, Response::HTTP_OK);
+    }
+
 
     /**
      * Updates the shift.
@@ -70,12 +96,12 @@ class ShiftController extends Controller
 
 
         if ($shift->end) {
-            return response()->json(['end' => ['Shift has already ended.']], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json(['end' => ['Smjena je već gotova']], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $data = [
             'end' => $request->input('end'),
-            'gross' => $request->input('gross')
+            'gross' => $this->shiftRepository->calculateGross($shift->start, $request->input('end'))
         ];
 
         $shift = $this->shiftRepository->update($id, $data);
@@ -101,7 +127,6 @@ class ShiftController extends Controller
 
         if ($id != -1) {
             $rules['end'] = 'required|date_format:Y-m-d H:i:s';
-            $rules['gross'] = 'required|integer';
         } else {
             $rules['start'] = 'required|date_format:Y-m-d H:i:s';
         }
