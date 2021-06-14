@@ -119,7 +119,7 @@ class BillRepository extends ModelRepository
         $restoredBill->restored_bill_id = $originalBill->id;
         $restoredBill->user = $data['user'];
         $restoredBill->number = $number;
-        $restoredBill->label = $this->getNewBillLabel($restoredBill->business_place_label, $number);
+        $restoredBill->label = $this->getNewBillLabel($restoredBill->business_place_label, $restoredBill->cash_register_label, $number);
         $restoredBill->restoring_reason = $restoringReason;
         $restoredBill->gross = -$originalBill->gross;
         $restoredBill->net = -$originalBill->net;
