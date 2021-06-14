@@ -40,6 +40,9 @@ class BillController extends Controller
     {
         $this->validateAttributes($request);
 
+        // TODO => Fetch branch from corporate based on cash register label.
+        // TODO => Branch and business place label is then taken from the branch.
+
         $bill = $this->billRepository->make($request->all());
 
         return response($bill, Response::HTTP_OK);
@@ -87,7 +90,7 @@ class BillController extends Controller
                 'user.id' => 'required|integer',
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
-                'business_place_label' => 'required|integer|min:1',
+                'cash_register_label' => 'required|integer|min:1',
                 'payment_method_id' => 'required|integer|exists:payment_methods,id',
                 'products' => 'required|array',
                 'products.*.id' => 'required|integer',

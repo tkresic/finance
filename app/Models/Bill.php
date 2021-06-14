@@ -18,6 +18,7 @@ class Bill extends Model
     protected $fillable = [
         'payment_method_id',
         'business_place_label',
+        'cash_register_label',
         'restored_bill_id',
         'user',
         'branch',

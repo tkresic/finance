@@ -25,11 +25,13 @@ class BillRepository extends ModelRepository
      * Formats new bill label.
      *
      * @param int $businessPlaceLabel
+     * @param int $cashRegisterLabel
      * @param $number
      * @return string
      */
-    public function getNewBillLabel(int $businessPlaceLabel, $number): string {
-        return "$businessPlaceLabel-1-$number";
+    public function getNewBillLabel(int $businessPlaceLabel, int $cashRegisterLabel, $number): string
+    {
+        return "$businessPlaceLabel-$cashRegisterLabel-$number";
     }
 
     /**
@@ -42,7 +44,10 @@ class BillRepository extends ModelRepository
     {
         $number = $this->getNewBillNumber();
 
-        $label = $this->getNewBillLabel($data['business_place_label'], $number);
+        // TODO => Should be passed from the controller
+        $data['business_place_label'] = 1;
+
+        $label = $this->getNewBillLabel($data['business_place_label'], $data['cash_register_label'], $number);
 
         $gross = 0;
         $vat = 0;
@@ -69,6 +74,7 @@ class BillRepository extends ModelRepository
         $data = [
             'payment_method_id' => $data['payment_method_id'],
             'business_place_label' => $data['business_place_label'],
+            'cash_register_label' => $data['cash_register_label'],
             'user' => $data['user'],
             'branch' => $data['branch'] ?? null,
             'products' => $data['products'],

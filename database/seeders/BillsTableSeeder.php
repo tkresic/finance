@@ -17,6 +17,7 @@ class BillsTableSeeder extends Seeder
         Bill::create([
             'payment_method_id' => 1,
             'business_place_label' => 1,
+            'cash_register_label' => 1,
             'gross' => 100,
             'user' => [
                 'id' => 1,
@@ -42,6 +43,7 @@ class BillsTableSeeder extends Seeder
         Bill::create([
             'payment_method_id' => 2,
             'business_place_label' => 1,
+            'cash_register_label' => 1,
             'gross' => 200,
             'user' => [
                 'id' => 1,

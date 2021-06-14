@@ -23,6 +23,7 @@ class CreateBillsTable extends Migration
 
             $table->integer('number');
             $table->integer('business_place_label');
+            $table->integer('cash_register_label');
 
             $table->string('label');
             $table->integer('gross');
