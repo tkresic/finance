@@ -50,7 +50,6 @@ class BillRepository extends ModelRepository
         $vat = 0;
         $taxes = [];
 
-        // TODO => Branch relationship with company and calculate taxes if necessary
         foreach ($data['products'] as $product) {
             $productTotal = $product['quantity'] * $product['price'];
             $gross += $productTotal;
