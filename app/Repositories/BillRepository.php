@@ -44,15 +44,13 @@ class BillRepository extends ModelRepository
     {
         $number = $this->getNewBillNumber();
 
-        // TODO => Should be passed from the controller
-        $data['business_place_label'] = 1;
-
-        $label = $this->getNewBillLabel($data['business_place_label'], $data['cash_register_label'], $number);
+        $label = $this->getNewBillLabel($data['branch']['businessPlaceLabel'], $data['cashRegisterLabel'], $number);
 
         $gross = 0;
         $vat = 0;
         $taxes = [];
 
+        // TODO => Branch relationship with company and calculate taxes if necessary
         foreach ($data['products'] as $product) {
             $productTotal = $product['quantity'] * $product['price'];
             $gross += $productTotal;
@@ -73,10 +71,10 @@ class BillRepository extends ModelRepository
 
         $data = [
             'payment_method_id' => $data['payment_method_id'],
-            'business_place_label' => $data['business_place_label'],
-            'cash_register_label' => $data['cash_register_label'],
+            'business_place_label' => $data['branch']['businessPlaceLabel'],
+            'cash_register_label' => $data['cashRegisterLabel'],
             'user' => $data['user'],
-            'branch' => $data['branch'] ?? null,
+            'branch' => $data['branch'],
             'products' => $data['products'],
             'number' => $number,
             'label' => $label,

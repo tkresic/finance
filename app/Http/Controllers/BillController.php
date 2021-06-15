@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BillCollection;
 use App\Repositories\BillRepository;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -33,19 +35,30 @@ class BillController extends Controller
      * Creates new bill.
      *
      * @param Request $request
-     * @return Response|ResponseFactory
+     * @return JsonResponse
      * @throws ValidationException
+     * @throws GuzzleException
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         $this->validateAttributes($request);
 
-        // TODO => Fetch branch from corporate based on cash register label.
-        // TODO => Branch and business place label is then taken from the branch.
+        $data = $request->all();
 
-        $bill = $this->billRepository->make($request->all());
+        $client = new Client();
+        $response = $client->request('GET', config('services.corporate') . '/api/cash-registers/' . $data['cash_register_id']);
+        $cashRegister = json_decode($response->getBody()->getContents(), true);
 
-        return response($bill, Response::HTTP_OK);
+        if ($cashRegister == null) {
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+
+        $data['branch'] = $cashRegister['branch'];
+        $data['cashRegisterLabel'] = $cashRegister['label'];
+
+        $bill = $this->billRepository->make($data);
+
+        return response()->json($bill, Response::HTTP_OK);
     }
 
     /**
@@ -90,7 +103,7 @@ class BillController extends Controller
                 'user.id' => 'required|integer',
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
-                'cash_register_label' => 'required|integer|min:1',
+                'cash_register_id' => 'required|integer|min:1',
                 'payment_method_id' => 'required|integer|exists:payment_methods,id',
                 'products' => 'required|array',
                 'products.*.id' => 'required|integer',
