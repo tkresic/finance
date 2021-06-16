@@ -6,7 +6,7 @@
 - `cp .env.example .env` and update `.env` with database credentials
 - `php artisan migrate:refresh --seed`
 
-### Generates API documentation for the main source code
+### Generates API documentation
 
 `php artisan swagger-lume:generate`
 
