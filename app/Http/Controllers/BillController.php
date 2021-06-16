@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BillCollection;
 use App\Repositories\BillRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -22,9 +21,19 @@ class BillController extends Controller
     }
 
     /**
-     * Lists all bills.
+     * Bills index route.
      *
-     * @return BillCollection|Response|ResponseFactory
+     * @OA\Get(
+     *      path="/api/bills",
+     *      description="Get all Bills",
+     *      tags={"Bills"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="Bill",
+     *          @OA\JsonContent()
+     *      ),
+     * )
+     * @return JsonResponse|ResponseFactory
      */
     public function index()
     {

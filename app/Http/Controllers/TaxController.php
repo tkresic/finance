@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TaxCollection;
 use App\Repositories\TaxRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,9 +19,19 @@ class TaxController extends Controller
     }
 
     /**
-     * Lists all taxes.
+     * Taxes index route.
      *
-     * @return TaxCollection|Response|ResponseFactory
+     * @OA\Get(
+     *      path="/api/taxes",
+     *      description="Get all Taxes",
+     *      tags={"Taxes"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="Tax",
+     *          @OA\JsonContent()
+     *      ),
+     * )
+     * @return JsonResponse|ResponseFactory
      */
     public function index()
     {
@@ -67,25 +76,6 @@ class TaxController extends Controller
         $tax = $this->taxRepository->update($id, $request->all());
 
         return response()->json($tax, Response::HTTP_OK);
-    }
-
-    /**
-     * Deletes the tax.
-     *
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function delete(int $id): JsonResponse
-    {
-        $tax = $this->taxRepository->find($id);
-
-        if ($tax == null) {
-            return response()->json(null, Response::HTTP_NOT_FOUND);
-        }
-
-        $success = $this->taxRepository->delete($id);
-
-        return $success ? response()->json($success, Response::HTTP_OK) : response()->json('Something went wrong', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**

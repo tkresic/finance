@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PaymentMethodCollection;
 use App\Models\PaymentMethod;
 use App\Repositories\PaymentMethodRepository;
 use Illuminate\Http\JsonResponse;
@@ -21,10 +20,20 @@ class PaymentMethodController extends Controller
     }
 
     /**
-     * Lists all payment methods.
+     * Payment Methods index route.
      *
+     * @OA\Get(
+     *      path="/api/payment-methods",
+     *      description="Get all Payment Methods",
+     *      tags={"Payment Methods"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="Payment Method",
+     *          @OA\JsonContent()
+     *      ),
+     * )
      * @param Request $request
-     * @return PaymentMethodCollection|Response|ResponseFactory
+     * @return JsonResponse|ResponseFactory
      */
     public function index(Request $request)
     {

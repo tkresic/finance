@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Finance API",
+        "contact": {
+            "name": "Toni Krešić",
+            "email": "tonikresic1997@gmail.com"
+        },
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/bills": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Bills index route.",
+                "description": "Get all Bills",
+                "operationId": "App\\Http\\Controllers\\BillController::index",
+                "responses": {
+                    "200": {
+                        "description": "Bill",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/payment-methods": {
+            "get": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Payment Methods index route.",
+                "description": "Get all Payment Methods",
+                "operationId": "App\\Http\\Controllers\\PaymentMethodController::index",
+                "responses": {
+                    "200": {
+                        "description": "Payment Method",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shifts": {
+            "get": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "Shifts index route.",
+                "description": "Get all Shifts",
+                "operationId": "App\\Http\\Controllers\\ShiftController::index",
+                "responses": {
+                    "200": {
+                        "description": "Shift",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/taxes": {
+            "get": {
+                "tags": [
+                    "Taxes"
+                ],
+                "summary": "Taxes index route.",
+                "description": "Get all Taxes",
+                "operationId": "App\\Http\\Controllers\\TaxController::index",
+                "responses": {
+                    "200": {
+                        "description": "Tax",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

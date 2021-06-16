@@ -32,6 +32,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/', 'TaxController@index');
         $router->post('/', 'TaxController@create');
         $router->put('/{id}', 'TaxController@update');
-        $router->delete('/{id}', 'TaxController@delete');
     });
 });

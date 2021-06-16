@@ -61,7 +61,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('services');
-
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +93,8 @@ $app->middleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);

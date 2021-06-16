@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ShiftCollection;
 use App\Repositories\ShiftRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,9 +19,19 @@ class ShiftController extends Controller
     }
 
     /**
-     * Lists all shifts.
+     * Shifts index route.
      *
-     * @return ShiftCollection|Response|ResponseFactory
+     * @OA\Get(
+     *      path="/api/shifts",
+     *      description="Get all Shifts",
+     *      tags={"Shifts"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="Shift",
+     *          @OA\JsonContent()
+     *      ),
+     * )
+     * @return JsonResponse|ResponseFactory
      */
     public function index()
     {
