@@ -54,7 +54,13 @@ class BillController extends Controller
 
         $data = $request->all();
 
-        $client = new Client();
+
+        $client = new Client([
+            'headers' => [
+                'Authorization' => $request->header('Authorization')
+            ]
+        ]);
+
         $response = $client->request('GET', config('services.corporate') . '/api/cash-registers/' . $data['cash_register_id']);
         $cashRegister = json_decode($response->getBody()->getContents(), true);
 
