@@ -8,8 +8,8 @@ $router->get('/', function () use ($router) {
     return view('index');
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
 
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
     $router->group(['prefix' => 'bills'], function () use ($router) {
         $router->get('/', 'BillController@index');
         $router->post('/', 'BillController@create');
