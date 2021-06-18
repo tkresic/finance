@@ -42,6 +42,7 @@ class PaymentMethodController extends Controller
         $paymentMethods = PaymentMethod::when($active, function ($query) use ($active) {
                 $query->where('active', $active);
             })
+            ->orderBy('id')
             ->get();
 
 
