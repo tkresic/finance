@@ -10,7 +10,8 @@
         "auth0/auth0-php": "^7.9",
         "darkaonline/swagger-lume": "^8.0",
         "guzzlehttp/guzzle": "^7.3",
-        "laravel/lumen-framework": "^8.0"
+        "laravel/lumen-framework": "^8.0",
+        "swooletw/laravel-swoole": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

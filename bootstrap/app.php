@@ -94,6 +94,7 @@ $app->routeMiddleware([
 */
 
 $app->register(\SwaggerLume\ServiceProvider::class);
+$app->register(SwooleTW\Http\LumenServiceProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
