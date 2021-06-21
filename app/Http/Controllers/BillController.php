@@ -118,6 +118,7 @@ class BillController extends Controller
                 'user.id' => 'required|integer',
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
+                'user.email' => 'required|string|max:255',
                 'cash_register_id' => 'required|integer|min:1',
                 'payment_method_id' => 'required|integer|exists:payment_methods,id',
                 'products' => 'required|array',
@@ -136,6 +137,7 @@ class BillController extends Controller
                 'user.id' => 'required|integer',
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
+                'user.email' => 'required|string|max:255',
                 'restoring_reason' => 'required|string|max:255',
             ];
         }
