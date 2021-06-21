@@ -7,7 +7,7 @@ services:
       - db
     restart: always
     ports:
-      - "8000:80"
+      - "8001:80"
     environment:
       - SWOOLE_HTTP_HOST=0.0.0.0
       - SWOOLE_HTTP_PORT=80
