@@ -37,7 +37,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return response($this->billRepository->all(['paymentMethod', 'restoredBill', 'restoredByBill']), Response::HTTP_OK);
+        return response($this->billRepository->all(['paymentMethod', 'restoredBill', 'restoredByBill'], ['number', 'DESC']), Response::HTTP_OK);
     }
 
     /**

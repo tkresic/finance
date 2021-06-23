@@ -29,12 +29,13 @@ abstract class ModelRepository
     /**
      * Gets all the entities.
      *
-     * @param array $with  Optional argument which loads given relationships.
+     * @param array $with Optional argument which loads given relationships.
+     * @param array $orderBy
      * @return Builder[]|Collection
      */
-    public function all(array $with = [])
+    public function all(array $with = [], array $orderBy = ['id', 'DESC'])
     {
-        return $this->model->with($with)->orderBy('id', 'DESC')->get();
+        return $this->model->with($with)->orderBy($orderBy[0], $orderBy[1])->get();
     }
 
     /**
