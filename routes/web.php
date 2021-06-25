@@ -9,7 +9,7 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/analytics', 'AnalyticController@index');
 
     $router->group(['prefix' => 'bills'], function () use ($router) {
