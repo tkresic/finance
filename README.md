@@ -1,6 +1,6 @@
 # Finance Microservice
 
-One of the microservices that supports the [desktop cash register application in Flutter](https://github.com/tkresic/app).
+One of the microservices that supports the [desktop cash register application in Flutter](https://github.com/tkresic/app). Docker image can be found [here](https://hub.docker.com/repository/docker/tkresic/shop).
 
 ## Set up the project
 
@@ -14,4 +14,4 @@ One of the microservices that supports the [desktop cash register application in
 
 ### Run the app
 
-`php -S localhost:8001 -t public`
+`docker-compose up` or `php -S localhost:8001 -t public`
