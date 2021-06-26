@@ -8,7 +8,6 @@ $router->get('/', function () use ($router) {
     return view('index');
 });
 
-
 $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/analytics', ['middleware' => 'auth:read:analytics', 'uses' => 'AnalyticController@index']);
 

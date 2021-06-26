@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 
 
 class Authenticate {
+
     /**
      * Run the request filter.
      *
@@ -20,21 +21,22 @@ class Authenticate {
      * @param null $scopeRequired
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $scopeRequired = null) {
+    public function handle(Request $request, Closure $next, $scopeRequired = null)
+    {
         $token = $request->bearerToken();
 
         if (!$token) {
-            return response()->json('No token provided', Response::HTTP_UNAUTHORIZED);
+            return response()->json('Žeton nije prisutan', Response::HTTP_UNAUTHORIZED);
         }
 
         $decodedToken = $this->validateAndDecode($token);
 
         if (!$decodedToken) {
-            return response()->json('Invalid token', Response::HTTP_UNAUTHORIZED);
+            return response()->json('Pogrešan žeton', Response::HTTP_UNAUTHORIZED);
         }
 
-        if ($scopeRequired && !$this->tokenHasScope($decodedToken, $scopeRequired)) {
-            return response()->json('Insufficient scope', Response::HTTP_FORBIDDEN);
+        if ($scopeRequired && !$this->tokenHasPermissions($decodedToken, $scopeRequired)) {
+            return response()->json('Nedovoljne ovlasti', Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);
@@ -46,7 +48,8 @@ class Authenticate {
      * @param $token
      * @return array|false
      */
-    public function validateAndDecode($token) {
+    public function validateAndDecode($token)
+    {
         try {
             $jwksUri = env('AUTH0_DOMAIN') . '.well-known/jwks.json';
             $jwksFetcher = new JWKFetcher(null, ['base_uri' => $jwksUri]);
@@ -62,12 +65,12 @@ class Authenticate {
     /**
      * Check if a token has a specific scope.
      *
-     * @param array $token - JWT access token to check.
-     * @param string $scopeRequired - Scope to check for.
+     * @param array $token
+     * @param string $scopeRequired
      *
      * @return bool
      */
-    protected function tokenHasScope(array $token, string $scopeRequired): bool
+    protected function tokenHasPermissions(array $token, string $scopeRequired): bool
     {
         if (empty($token['permissions'])) {
             return false;
