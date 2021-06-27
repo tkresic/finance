@@ -46,13 +46,12 @@ class AnalyticController extends Controller
 
         foreach ($dates as $date => $bills) {
             foreach ($bills as $bill) {
+                if (array_key_exists($date, $income)) {
+                    $income[$date] += round(($bill->gross / 100), 2);
+                } else {
+                    $income[$date] = round($bill->gross / 100, 2);
+                }
                 foreach ($bill->products as $product) {
-                    if (array_key_exists($date, $income)) {
-                        $income[$date] += round(($product['quantity'] * $product['price'] / 100), 2);
-                    } else {
-                        $income[$date] = round($product['quantity'] * $product['price'] / 100, 2);
-                    }
-
                     if (array_key_exists($product['name'], $quantities)) {
                         $quantities[$product['name']] += $product['quantity'];
                         $sales[$product['name']] += round(($product['quantity'] * $product['price'] / 100), 2);
