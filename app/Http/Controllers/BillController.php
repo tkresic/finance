@@ -54,7 +54,6 @@ class BillController extends Controller
 
         $data = $request->all();
 
-
         $client = new Client([
             'headers' => [
                 'Authorization' => $request->header('Authorization')
@@ -119,7 +118,7 @@ class BillController extends Controller
                 'user.name' => 'required|string|max:255',
                 'user.username' => 'required|string|max:255',
                 'user.email' => 'required|string|max:255',
-                'cash_register_id' => 'required|string|min:1',
+                'cash_register_id' => 'required|integer|min:1',
                 'payment_method_id' => 'required|integer|exists:payment_methods,id',
                 'products' => 'required|array',
                 'products.*.id' => 'required|integer',
